@@ -25,20 +25,16 @@ Output: LED control
 
 ### Debug console
 To Enable `printf` function in RX140 project  
-Modify **lowlvl.c**  
+Modify **r_bsp_config.h**  
 
-    \src\smc_gen\r_bsp\mcu\all\lowlvl.c
-
-Redirect charget/charput to user function
+    \src\smc_gen\r_config\r_bsp_config.h
 
 ```c
-    #if 1   /* PRINTF */    // paul20210824
-    #define BSP_CFG_USER_CHARGET_ENABLED    (1)
-    #define BSP_CFG_USER_CHARGET_FUNCTION     my_sw_charget_function
+#define BSP_CFG_USER_CHARGET_ENABLED    (1)  // paul20210825
+#define BSP_CFG_USER_CHARGET_FUNCTION     my_sw_charget_function
 
-    #define BSP_CFG_USER_CHARPUT_ENABLED    (1)
-    #define BSP_CFG_USER_CHARPUT_FUNCTION     my_sw_charput_function
-    #endif  /* PRINTF */
+#define BSP_CFG_USER_CHARPUT_ENABLED    (1)  // paul20210825
+#define BSP_CFG_USER_CHARPUT_FUNCTION     my_sw_charput_function
 ```
 
 Modify __Config_SCI5.c__  
@@ -74,7 +70,7 @@ Add __serial_printf.c__
 ******************************************************************************/
 void my_sw_charput_function(char output_char)
 {
-//  IR(SCI5, TXI5) = 1;
+    //  IR(SCI5, TXI5) = 1;
     /* Wait for transmit buffer to be empty */
     while(IR(SCI5, TXI5) == 0);
 
@@ -131,3 +127,5 @@ char my_sw_charget_function(void)
 Add macro definition
 Properties -> C/C++ Build -> Settings -> Tool Settings -> Compiler -> Source -> Macro definition
 Add `DEBUG_CONSOLE`
+
+
