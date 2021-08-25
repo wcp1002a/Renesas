@@ -1,8 +1,8 @@
 # RX140 EVK
-## Pin design
+## Pin Usage
 Hardware Connection Layout  
 
-Function    |Signal Name | Pin Name  | RX140 EVK
+Function    | Signal Name| Pin Name  | RX140 EVK
 ------------|------------|-----------|-----------
 UART        | TXD5       | PC3       | CN2.31
 UART        | RXD5       | PC2       | CN2.32
@@ -10,23 +10,28 @@ I2C         | SSCL1      | P15       | CN2.19
 I2C         | SSDA1      | P16       | CN2.18
 GPIO        | Input      | P30       | SW1
 GPIO        | Output     | P31       | LED0
+Power       | TGVCC      | MCU_VCC   | CN2.10
+Ground      | GND        | GND       | CN2.8
 
-### UART
-* TXD5  PC3     CN2.31
-* RXD5  PC2     CN2.32
+#### UART
+For message display and debug console
  
-### I2C
-* SSCL1 P15     CN2.19
-* SSDA1 P16     CN2.18
+#### I2C
+To Control LCD1602 and ToF module
 
-### GPIO
-* Input     P30     SW1
-* Output    P31     LED0
-
+#### GPIO
+Input: Push button for flow control  
+Output: LED control
 
 ### Debug console
-Modify lowlvl.c
+To Enable `printf` function in RX140 project  
+Modify **lowlvl.c**  
 
+    \src\smc_gen\r_bsp\mcu\all\lowlvl.c
+
+Redirect charget/charput to user function
+
+```c
     #if 1   /* PRINTF */    // paul20210824
     #define BSP_CFG_USER_CHARGET_ENABLED    (1)
     #define BSP_CFG_USER_CHARGET_FUNCTION     my_sw_charget_function
@@ -34,28 +39,95 @@ Modify lowlvl.c
     #define BSP_CFG_USER_CHARPUT_ENABLED    (1)
     #define BSP_CFG_USER_CHARPUT_FUNCTION     my_sw_charput_function
     #endif  /* PRINTF */
+```
 
-Modify R_Config_SCI5_Start() of Config_SCI5.c
-
+Modify __Config_SCI5.c__  
+Disable SCI interrupt in R_Config_SCI5_Start()
+```c
     /* Enable SCI interrupt */
     IEN(SCI5, TXI5) = 0U;   // paul20210824
     // IEN(SCI5, TXI5) = 1U;   // paul20210824
+```
 
-Add below setting in main.c
+Modify __main.c__  
+Enable SCI module in main()
 
+```c
     R_Config_SCI5_Start();  // Start UART
 
     // paul20210824
-    PORTC.PMR.BYTE |= 0x08U;
-    SCI5.SCR.BIT.TE = 1U;
-    SCI5.SCR.BIT.TIE = 1U;
-    IR(SCI5, TXI5) = 1;
-
+    PORTC.PMR.BYTE |= 0x08U;    // Enable PC3 (TXD)
+    SCI5.SCR.BIT.TE = 1U;       // TX enable
+    SCI5.SCR.BIT.TIE = 1U;      // TX interrupt enable
+    IR(SCI5, TXI5) = 1;         // Interrput flag
+```
 
     printf("Renesas RX140 printf\r\n");
+
+Add __serial_printf.c__
+```c
+/******************************************************************************
+* Function Name: my_sw_charput_function
+* Description  : Outputs a character on a serial port
+* Arguments    : character to output
+* Return Value : none
+******************************************************************************/
+void my_sw_charput_function(char output_char)
+{
+//  IR(SCI5, TXI5) = 1;
+    /* Wait for transmit buffer to be empty */
+    while(IR(SCI5, TXI5) == 0);
+
+    /* Clear TXI IR bit */
+    IR(SCI5, TXI5) = 0;
+
+    /* Write the character out */ 
+    SCI5.TDR = output_char;
+}
+/******************************************************************************
+End of function  my_sw_charput_function
+******************************************************************************/
+
+/******************************************************************************
+* Function Name: my_sw_charget_function
+* Description  : Gets a character on a serial port
+* Arguments    : character to output
+* Return Value : none
+******************************************************************************/
+char my_sw_charget_function(void)
+{
+    uint8_t temp;
+    
+    /* Read any 'junk' out of receive buffer */
+    temp = SCI5.RDR;
+    
+    /* Clear flag to receive next byte */
+    IR(SCI5, RXI5) = 0;
+    
+    /* Wait for next receive data */
+    while(IR(SCI5, RXI5) == 0);
+    
+    /* Read data */
+    temp = SCI5.RDR;
+    
+    /* Echo data back out */
+    if(temp == 0x0d)
+    {
+        /* Enter was pressed, output newline */
+        charput('\r');
+        charput('\n');
+    }
+    else
+    {
+        /* Echo back character */
+        charput(temp);
+    }
+    
+    /* Receive data acquired, send back up */
+    return temp;        
+}
+```
 
 Add macro definition
 Properties -> C/C++ Build -> Settings -> Tool Settings -> Compiler -> Source -> Macro definition
 Add `DEBUG_CONSOLE`
-
-
