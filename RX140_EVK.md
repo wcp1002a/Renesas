@@ -12,7 +12,7 @@ I2C         | SSCL1      | P15       | CN2.19
 I2C         | SSDA1      | P16       | CN2.18
 Push Button | P30        | P30       | SW1
 LED Control | P31        | P31       | LED0
-EN Control  | P35        | P35       | CN2.11
+EN Control  | P32        | P32       | CN2.12
 Power       | TGVCC      | MCU_VCC   | CN2.10
 Ground      | GND        | GND       | CN2.8
 
