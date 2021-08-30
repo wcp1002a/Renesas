@@ -1,4 +1,6 @@
 # RX140 EVK
+LSI: R5F51403AxFM
+
 ## Pin Usage
 Hardware Connection Layout  
 
@@ -8,8 +10,9 @@ UART        | TXD5       | PC3       | CN2.31
 UART        | RXD5       | PC2       | CN2.32
 I2C         | SSCL1      | P15       | CN2.19
 I2C         | SSDA1      | P16       | CN2.18
-GPIO        | Input      | P30       | SW1
-GPIO        | Output     | P31       | LED0
+Push Button | P30        | P30       | SW1
+LED Control | P31        | P31       | LED0
+EN Control  | P35        | P35       | CN2.11
 Power       | TGVCC      | MCU_VCC   | CN2.10
 Ground      | GND        | GND       | CN2.8
 
@@ -125,4 +128,9 @@ char my_sw_charget_function(void)
     return temp;        
 }
 ```
+
+Add macro definition
+Properties -> C/C++ Build -> Settings -> Tool Settings -> Compiler -> Source -> Macro definition
+Add `DEBUG_CONSOLE`
+
 
