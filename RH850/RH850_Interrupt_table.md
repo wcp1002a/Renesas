@@ -38,14 +38,14 @@ RH850 使用 C 語言設置中斷向量表
 ![rh850_interrupt_1](attach/rh850_interrupt_1.png)
 
 2. 將 `boot.asm` 中跟中斷向量表相關部分內容註釋  
-![rh850_interrupt_2](attach\rh850_interrupt_2.png)
+![rh850_interrupt_2](attach/rh850_interrupt_2.png)
 
 3. 修改 `boot.asm` ，將使用 `r_cg_intvector.c` 的中斷向量表  
-![rh850_interrupt_3](attach\rh850_interrupt_3.png)
+![rh850_interrupt_3](attach/rh850_interrupt_3.png)
 
 4. 加入 section 設定  
 由路徑 `CC-RH (Build Tool)` -> `Link Options` -> `Section`，加入 `EIINTTBL.const` 如下  
-![rh850_interrupt_4](attach\rh850_interrupt_4.png)
+![rh850_interrupt_4](attach/rh850_interrupt_4.png)
 CC
 
 #### 三、修改boot.asm及加入中斷定義檔 sc_intprg-S1.c
@@ -66,5 +66,5 @@ void main(void)
 
 #### 其它
 TAU 中斷 142 ，可以計算 0x200 + 142 x 4 = 0x438
-![rh850_interrupt_5](attach\rh850_interrupt_5.png)
-![rh850_interrupt_6](attach\rh850_interrupt_6.png)
+![rh850_interrupt_5](attach/rh850_interrupt_5.png)
+![rh850_interrupt_6](attach/rh850_interrupt_6.png)
