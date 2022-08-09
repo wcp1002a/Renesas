@@ -35,7 +35,7 @@ RH850 使用 C 語言設置中斷向量表
 
 #### 二、修改 boot.asm
 1. 將使用查表方式的註釋打開  
-![rh850_interrupt_1](attach\rh850_interrupt_1.png)
+![rh850_interrupt_1](attach/rh850_interrupt_1.png)
 
 2. 將 `boot.asm` 中跟中斷向量表相關部分內容註釋  
 ![rh850_interrupt_2](attach\rh850_interrupt_2.png)
