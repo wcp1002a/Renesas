@@ -1,27 +1,28 @@
 RH850 FCL
 ==========
 ## FCL Sections example
+
 Address           | Section
 ------------------|------------
  %ResetVectorPE1% | RESET
  &nbsp;           | EIINTTBL
  0x00008000       | .const
-                  | .INIT_DSEC.const
-                  | .INIT_BSEC.const
-                  | .text
-                  | R_FCL_CODE_ROM.text
-                  | R_FCL_CONST.const
-                  | R_FCL_CODE_USRINT.text
-                  | R_FCL_CODE_USR.text
-                  | R_FCL_CODE_RAM.text
-                  | R_FCL_CODE_ROMRAM.text
-                  | R_FCL_CODE_RAM_EX_PROT.text
-                  | .data
+ &nbsp;           | .INIT_DSEC.const
+ &nbsp;           | .INIT_BSEC.const
+ &nbsp;           | .text
+ &nbsp;           | R_FCL_CODE_ROM.text
+ &nbsp;           | R_FCL_CONST.const
+ &nbsp;           | R_FCL_CODE_USRINT.text
+ &nbsp;           | R_FCL_CODE_USR.text
+ &nbsp;           | R_FCL_CODE_RAM.text
+ &nbsp;           | R_FCL_CODE_ROMRAM.text
+ &nbsp;           | R_FCL_CODE_RAM_EX_PROT.text
+ &nbsp;           | .data
  0xFEBE0000       | FCL_RESERVED.bss
-                  | R_FCL_DATA.bss
-                  | .data.R
-                  | .bss
-                  | .stack.bss
+ &nbsp;           | R_FCL_DATA.bss
+ &nbsp;           | .data.R
+ &nbsp;           | .bss
+ &nbsp;           | .stack.bss
 
 
 ## Steps
