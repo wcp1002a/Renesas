@@ -53,28 +53,27 @@ Address           | Section
 ###### 設定 Emulator
 設定 RH850 E2 (Debug Tool) -> Connect Settings -> Using the code flash self programming 為 Yes
 
-W0561017:The evaluation period of CC-RH V2 has expired. Please consider purchasing the product.
-W0561322:Section alignment mismatch : "R_FCL_CODE_RAM.text"
-W0561322:Section alignment mismatch : "R_FCL_CODE_ROMRAM.text"
-W0561322:Section alignment mismatch : "R_FCL_CODE_USR.text"
-W0561120:Section address is not assigned to "R_FCL_CODE_RAM.text"
-W0561120:Section address is not assigned to "R_FCL_CODE_ROMRAM.text"
-W0561120:Section address is not assigned to "R_FCL_CODE_USRINT.text"
-W0561120:Section address is not assigned to "R_FCL_CODE_USR.text"
-W0561120:Section address is not assigned to "R_FCL_CODE_RAM_EX_PROT.text"
-W0561120:Section address is not assigned to "R_FCL_CODE_ROM.text"
-W0561120:Section address is not assigned to "R_FCL_DATA.bss"
-W0561120:Section address is not assigned to "R_FCL_CONST.const"
-W0561017:The evaluation period of CC-RH V2 has expired. Please consider purchasing the product.
-Renesas Optimizing Linker Completed
------- Build ended(Error:0, Warning:13)(rh850_study, DefaultBuild) ------
-========== Ended(Success:1 Projects, Failed:0 Projects)(2022年7月29日 11:05:43) ==========
+    W0561017:The evaluation period of CC-RH V2 has expired. Please consider purchasing the product.
+    W0561322:Section alignment mismatch : "R_FCL_CODE_RAM.text"
+    W0561322:Section alignment mismatch : "R_FCL_CODE_ROMRAM.text"
+    W0561322:Section alignment mismatch : "R_FCL_CODE_USR.text"
+    W0561120:Section address is not assigned to "R_FCL_CODE_RAM.text"
+    W0561120:Section address is not assigned to "R_FCL_CODE_ROMRAM.text"
+    W0561120:Section address is not assigned to "R_FCL_CODE_USRINT.text"
+    W0561120:Section address is not assigned to "R_FCL_CODE_USR.text"
+    W0561120:Section address is not assigned to "R_FCL_CODE_RAM_EX_PROT.text"
+    W0561120:Section address is not assigned to "R_FCL_CODE_ROM.text"
+    W0561120:Section address is not assigned to "R_FCL_DATA.bss"
+    W0561120:Section address is not assigned to "R_FCL_CONST.const"
+    W0561017:The evaluation period of CC-RH V2 has expired. Please consider purchasing the product.
+    Renesas Optimizing Linker Completed
+    ------ Build ended(Error:0, Warning:13)(rh850_study, DefaultBuild) ------
+    ========== Ended(Success:1 Projects, Failed:0 Projects)(2022年7月29日 11:05:43) ==========
 
 
     
+Section 設定的文字
+    
+    RESET,EIINTTBL/%ResetVectorPE1%,.const,.INIT_DSEC.const,.INIT_BSEC.const,.text,R_FCL_CODE_ROM.text,R_FCL_CONST.const,R_FCL_CODE_USRINT.text,R_FCL_CODE_USR.text,R_FCL_CODE_RAM.text,R_FCL_CODE_ROMRAM.text,R_FCL_CODE_RAM_EX_PROT.text,.data/00008000,FCL_RESERVED.bss,R_FCL_DATA.bss,.data.R,.bss,.stack.bss/FEDE8000
 
-
-
-RESET,EIINTTBL/%ResetVectorPE1%,.const,.INIT_DSEC.const,.INIT_BSEC.const,.text,R_FCL_CODE_ROM.text,R_FCL_CONST.const,R_FCL_CODE_USRINT.text,R_FCL_CODE_USR.text,R_FCL_CODE_RAM.text,R_FCL_CODE_ROMRAM.text,R_FCL_CODE_RAM_EX_PROT.text,.data/00008000,FCL_RESERVED.bss,R_FCL_DATA.bss,.data.R,.bss,.stack.bss/FEDE8000
-
-RESET,EIINTTBL/%ResetVectorPE1%,.const,.INIT_DSEC.const,.INIT_BSEC.const,.text,R_FCL_CODE_ROM.text,R_FCL_CONST.const,R_FCL_CODE_USRINT.text,R_FCL_CODE_USR.text,R_FCL_CODE_RAM.text,R_FCL_CODE_ROMRAM.text,R_FCL_CODE_RAM_EX_PROT.text,.data/00008000,FCL_RESERVED.bss,R_FCL_DATA.bss,.data.R,.bss,.stack.bss/FEBE0000
+    RESET,EIINTTBL/%ResetVectorPE1%,.const,.INIT_DSEC.const,.INIT_BSEC.const,.text,R_FCL_CODE_ROM.text,R_FCL_CONST.const,R_FCL_CODE_USRINT.text,R_FCL_CODE_USR.text,R_FCL_CODE_RAM.text,R_FCL_CODE_ROMRAM.text,R_FCL_CODE_RAM_EX_PROT.text,.data/00008000,FCL_RESERVED.bss,R_FCL_DATA.bss,.data.R,.bss,.stack.bss/FEBE0000
