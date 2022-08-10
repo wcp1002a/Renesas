@@ -4,7 +4,7 @@ RH850 FCL
 Address           | Section
 ------------------|------------
  %ResetVectorPE1% | RESET
-                  | EIINTTBL
+ s                | EIINTTBL
  0x00008000       | .const
                   | .INIT_DSEC.const
                   | .INIT_BSEC.const
