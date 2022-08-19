@@ -26,7 +26,7 @@ Address           | Section
 
 
 ## Steps
-###### 複製 FCL\ 下 `fcl_` 開頭的檔案及 `target.h` 至專案目錄下
+###### 複製 `fcl_` 開頭的檔案和 `target.h` ，以及FCL目錄至專案目錄下
 
     fcl_cfg.h
     fcl_descriptor.c
@@ -35,13 +35,22 @@ Address           | Section
     fcl_user.h
     target.h
 
+    FCL
+     │  r_fcl.h
+     │  r_fcl_types.h
+     │
+     └─lib
+          r_fcl_env.h
+          r_fcl_global.h
+          r_fcl_hw_access.c
+          r_fcl_hw_access_asm.asm
+          r_fcl_user_if.c
+          r_typedefs.h
 
 ###### 加入路徑
 `CC-RH (Build Tool)` -> `Compile Options` -> `Additional include paths`
 
-    FCL\lib
-    FCL
-
+ 
 ###### 修改 cstart.asm
 將 STACKSIZE 改大
 
