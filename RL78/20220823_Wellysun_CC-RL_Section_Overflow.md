@@ -25,7 +25,7 @@ Address  | Section
 E0562320 | [Message]       | Section address overflowed out of range : "section"
 ---------|-----------------|:---------------------------------------------
  &nbsp;  | [Explanation]   | The address of section exceeds the usable address range.
- &nbsp;  | [Action by User]|[V1.01 only] When a project is created in an integrated development environment, the dummy .const section which is to be allocated to the mirror area is generated in the startup routine that was created at project creation. Comment out the following lines in the startup routine.<br> .SECTION .constCONST <br> .L_section_const:
+ &nbsp;  | [Action by User]|[V1.01 only] When a project is created in an integrated development environment, the dummy .const section which is to be allocated to the mirror area is generated in the startup routine that was created at project creation. Comment out the following lines in the startup routine.<br> .SECTION .const, CONST <br> .L_section_const:
 
 發生此錯誤是因為在啟動程式中(由CS+ IDE自動產生)，將分配給鏡像區域的虛擬 .const 部分。
 當您分配的地址大於鏡像區域地址時，就會出現此錯誤。
