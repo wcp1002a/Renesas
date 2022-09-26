@@ -38,6 +38,10 @@ Create GHS Project
 * 加入 ld 檔案，並設定 `sc_intprg-S1,c` 的 `EIINTTBL` section 位址  
   `EIINTTBL 0x200 :>.`
 
+`sc_intprg-S1.c`可以在以下路徑找到
+
+    C:\Program Files (x86)\Renesas Electronics\SmartConfigurator\RH850\RH850F1KM_SampleProjects\intprg\sc_intprg-S1.c
+
 ```c
     /* 以上省略 */
     SECTIONS
