@@ -15,7 +15,6 @@ LED Control | P915       | P915      | LED1
 Push Button | P004       | P004      | S1
 Ground      | GND        | GND       | J2.40
 Power       | 3.3V       | 3.3V      | J2.1
-
 EN Control  | P17        | P17       | CN2.17
 
 #### UART
