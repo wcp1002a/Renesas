@@ -48,9 +48,15 @@ RH850 使用 C 語言設置中斷向量表
 ![rh850_interrupt_4](attach/rh850_interrupt_4.png)
 CC
 
-#### 三、修改boot.asm及加入中斷定義檔 sc_intprg-S1.c
+#### 三、加入中斷函式定義檔 sc_intprg-S1.c
 
 * 編譯會找不到中斷函式 `eiintxx`，將 `sc_intprg-S1.c` 加入專案中
+* 中斷函式定義檔可在以下路徑找到
+
+   ` C:\Program Files (x86)\Renesas Electronics\SmartConfigurator\RH850\RH850F1KM_SampleProjects\intprg`
+
+
+#### 其它
 * 在 `r_cg_main.c` 中 (`.\src\smc_gen\general\`) 加入 TAU 啟動函式
 
 ```c
@@ -64,7 +70,6 @@ void main(void)
 }
 ```
 
-#### 其它
 TAU 中斷 142 ，可以計算 0x200 + 142 x 4 = 0x438
 
 ![rh850_interrupt_5](attach/rh850_interrupt_5.png)
