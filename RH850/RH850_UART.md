@@ -21,6 +21,6 @@ Ground      | GND        | GND       | J7.21
     - `BRP01_SETTING` - (`RLN3nLBRP01` + 1)
     - `NSPB_SEL_CNT` - `RLN3nLWBR.NSPB[3:0]` selected count
 
-This sentence uses `$` delimiters to show math inline:  $\sqrt{3x-1}+(1+x)^2$
+$(\frac{`LINFREQ` x `LPRS_SELCLK`}{/ `BRP01_SETTING` x `NSPB_SEL_CNT`})$
 
 $\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$
