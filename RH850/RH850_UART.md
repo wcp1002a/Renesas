@@ -21,6 +21,6 @@ Ground      | GND        | GND       | J7.21
     - `BRP01_SETTING` - (`RLN3nLBRP01` + 1)
     - `NSPB_SEL_CNT` - `RLN3nLWBR.NSPB[3:0]` selected count
 
-$\frac{`LINFREQ` x `LPRS_SELCLK`}{/ `BRP01_SETTING` x `NSPB_SEL_CNT`}$
+$\frac{LINFREQ x LPRS_SELCLK}{`BRP01_SETTING` x `NSPB_SEL_CNT`}$
 $\frac{x}{y}$
 $\Gamma(z) = \int_0^\infty t^{z-1}e^{-t}dt\,.$
