@@ -55,6 +55,7 @@ Ground      | GND        | GND       | J1.39
 
     Baud = 40MHz / 1 / (0+1) / 10 = 4,000,000
 [RH850_F1KM-S4_UART_BAUD_4Mbps.zip](code/RH850_F1KM-S4_UART_BAUD_4Mbps.zip)
+[TEST](code/)
 
 ## 問題：傳輸多個位元僅有一個位元輸出
 #### 正常流程如下
