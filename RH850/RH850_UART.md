@@ -149,7 +149,7 @@ Ground      | GND        | GND       | J1.39
     }
 
 
-#### 附錄
+## 附錄
 ![RH850_UART_1_RLIN_CLK](attach/RH850_UART_1_RLIN_CLK.png)
 ![RH850_UART_2_CPU_CLK](attach/RH850_UART_2_CPU_CLK.png)
 ![RH850_UART_3_Waveform](attach/RH850_UART_3_Waveform.jpg)
