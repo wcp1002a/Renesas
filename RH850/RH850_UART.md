@@ -54,7 +54,7 @@ Ground      | GND        | GND       | J1.39
     RLN30.LBRP01.UINT16 = _UART0_BAUD_RATE_PRESCALER;
 
     Baud = 40MHz / 1 / (0+1) / 10 = 4,000,000
-[1](code/RH850_F1KM-S4_UART_BAUD_4Mbps.zip)
+[RH850_F1KM-S4_UART_BAUD_4Mbps.zip](code/RH850_F1KM-S4_UART_BAUD_4Mbps.zip)
 
 ## 問題：傳輸多個位元僅有一個位元輸出
 #### 正常流程如下
