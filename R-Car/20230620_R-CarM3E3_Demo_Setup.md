@@ -4,7 +4,7 @@
 
 Guideline to setup
 ------------------
-##### Prepare eMMC card
+#### Prepare eMMC card
 Use fdisk to prepare 1 partition on eMMC card
 
     #fdisk /dev/mmcblk0
@@ -31,6 +31,9 @@ Extract the tarball root file system to the SD card
     #cd ~
     #umount /mnt
 
+Clear uBoot settings
+
+    env default -a
 
 ### Mode (Jumper)
 Jumper設定參考以下文件
@@ -64,56 +67,7 @@ HyperFlash ROM boot at 150 MHz (300 Mbps) using DMA, Booting is from the HyperFl
 
 Demonstration Setup
 -------------------
-##### working area
-
-```
-sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm
-
-git clone git://git.yoctoproject.org/poky
-git clone git://git.openembedded.org/meta-openembedded 
-git clone git://github.com/renesas-rcar/meta-renesas.git
-git clone https://github.com/renesas-rcar/meta-renesas
-
-# TF test
-setenv bootargs 'rw root=/dev/mmcblk0p1 rootwait'
-setenv bootcmd 'ext4load mmc 1:1 0x48080000 /boot/Image;ext4load mmc 1:1 0x48000000 /boot/r8a77990-ebisu-4d_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
-saveenv
-
-# eMMC OK
-setenv bootargs 'rw root=/dev/mmcblk0p1 rootwait'
-setenv bootcmd 'ext4load mmc 2:1 0x48080000 /boot/Image;ext4load mmc 2:1 0x48000000 /boot/r8a77990-ebisu-4d_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
-saveenv
-
-# BSP (TF)
-setenv bootargs 'rw root=/dev/mmcblk2p1 rootwait'
-setenv bootcmd 'ext4load mmc 1:1 0x48080000 boot/Image;ext4load mmc 1:1 0x48000000 boot/r8a77990-ebisu-4d.dtb;booti 0x48080000 - 0x48000000'
-saveenv
-
-
-# TEST
-setenv bootargs 'rw root=/dev/mmcblk1p1 rootwait'
-setenv bootcmd 'ext4load mmc 1:1 0x48080000 boot/Image;ext4load mmc 1:1 0x48000000 boot/r8a77990-ebisu-4d.dtb;booti 0x48080000 - 0x48000000'
-saveenv
-
-# M3 tftp
-setenv ethaddr '2e:09:0a:06:d5:ba'
-setenv ipaddr '192.168.2.3'
-setenv serverip '192.168.2.1'
-setenv netmask '255.255.255.0'
-setenv bootcmd 'tftp 0x48080000 Image;tftp 0x48000000 r8a7796-salvator-xs-2x4g_cr7_rproc_lvds.dtb;booti 0x48080000 - 0x48000000'
-setenv bootargs 'consoleblank=0 console=ttySC0,115200 rw root=/dev/nfs nfsroot=192.168.2.1:/home/p/rcar/m3/rfs,nfsvers=3 ip=192.168.2.3'
-
-saveenv
-
-# M3 SD0
-setenv bootargs 'consoleblank=0 console=ttySC0,115200 rw root=/dev/mmcblk1p1 rootwait'
-setenv bootcmd 'ext4load mmc 0:1 0x48080000 boot/Image;ext4load mmc 0:1 0x48000000 boot/r8a7796-salvator-xs-2x4g_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
-saveenv
-
-
-```
-
-#### 1. E3 210408_PoC_DISCOM_DOC_2D_3D
+### 1. E3 210408_PoC_DISCOM_DOC_2D_3D
 設置，顯示由 Dual LVDS (CN18及CN38)輸出，Jumper設置如下：
 
     SW17: ON
@@ -122,7 +76,7 @@ saveenv
     SW45: ON
     SW47: OFF
     
-ipl
+IPL
 
     Hyper-AutoOrSelectTransfer_UltraSpeed_E3.ttl
 
@@ -132,24 +86,19 @@ rootfs 檔案
 
 rootfs存放於SD插槽
 
-    setenv bootargs 'rw root=/dev/mmcblk1p1 rootwait'
-    setenv bootcmd 'ext4load mmc 0:1 0x48080000 boot/Image;ext4load mmc 0:1 0x48000000 boot/r8a77990-ebisu-4d_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
+    setenv bootargs 'rw root=/dev/mmcblk1p1 rootfstype=ext4 rootwait'
+    setenv bootcmd 'ext4load mmc 0:1 0x48080000 /boot/Image;ext4load mmc 0:1 0x48000000 /boot/r8a77990-ebisu-4d_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
+    saveenv
 
-```
-setenv bootargs 'rw root=/dev/mmcblk1p1 rootfstype=ext4 rootwait'
-setenv bootcmd 'ext4load mmc 0:1 0x48080000 /boot/Image;ext4load mmc 0:1 0x48000000 /boot/r8a77990-ebisu-4d_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
-saveenv
-```
 rootfs存放於TF插槽
 
     setenv bootargs 'rw root=/dev/mmcblk2p1 rootwait'
     setenv bootcmd 'ext4load mmc 1:1 0x48080000 boot/Image;ext4load mmc 1:1 0x48000000 boot/r8a77990-ebisu-4d_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
     
 
-    env default -a
 
-#### 2. E3 20230203_PoC_CR7_Demo
-ipl
+### 2. E3 20230203_PoC_CR7_Demo
+IPL
 
     Hyper-AutoOrSelectTransfer_UltraSpeed.ttl
 
@@ -171,7 +120,7 @@ TF (eMMC有儲存狀況下)
 
 需注意，若已燒錄 safertos時，在解壓縮 rootfs 至 eMMC 時，常會有錯誤造成中斷。
 
-#### 3. ebisu_4D_AndroidAuto_Cable_PoC_20230224 Setup
+### 3. ebisu_4D_AndroidAuto_Cable_PoC_20230224 Setup
 IPL
 
     Hyper-AutoOrSelectTransfer_UltraSpeed_E3_4D_CR7.ttl
@@ -184,20 +133,24 @@ Host PC
 uBoot
 
     fastboot
-#### 4. M3 20230515_M3e_New_demo_by_switches
-ipl 直接運行 ttl (包含燒錄 MiniMonitor)  
+### 4. M3 20230515_M3e_New_demo_by_switches
+IPL 直接運行 ttl (包含燒錄 MiniMonitor)  
+`Hyper-AutoOrSelectTransfer_UltraSpeed_M3.ttl`
 
-         | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-    SW10 | ON|OFF|OFF|OFF|OFF|OFF|OFF|OFF|
+    ====================
+    SERIAL DOWNLOAD MODE
+    ====================
+    SW10: ON OFF OFF OFF OFF OFF OFF OFF
     ==> Boot from C53, DDR1600, SCIF download mode
 
-    Hyper-AutoOrSelectTransfer_UltraSpeed_M3.ttl
 
-         | 1 | 2 | 3 | 4 | 5 | 6 | 7 | 8 |
-    SW10 | ON|OFF|OFF|OFF|ON |ON |OFF|ON |
+    ====================
+    Hyper Flash Mode
+    ====================
+    SW10: ON OFF OFF OFF ON ON OFF ON
     ==> Boot from C53, DDR1600, boot from HyperFlash
 
-TFTP
+TFTP 設定
 
     setenv ethaddr '2e:09:0a:06:d5:ba'
     setenv ipaddr '192.168.2.3'
@@ -210,19 +163,19 @@ TFTP
 
     saveenv
 
-SD0
+SD0 設定
 
     setenv bootargs 'consoleblank=0 console=ttySC0,115200 rw root=/dev/mmcblk1p1 rootwait'
     setenv bootcmd 'ext4load mmc 0:1 0x48080000 boot/Image;ext4load mmc 0:1 0x48000000 boot/r8a7796-salvator-xs-2x4g_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
     saveenv
 
-SD2
+SD2 設定
 
     setenv bootargs 'consoleblank=0 console=ttySC0,115200 rw root=/dev/mmcblk2p1 rootfstype=ext4 rootwait'
     setenv bootcmd 'ext4load mmc 2:1 0x48080000 /boot/Image;ext4load mmc 2:1 0x48000000 /boot/r8a7796-salvator-xs-2x4g_cr7_rproc_lvds.dtb;booti 0x48080000 - 0x48000000'
     saveenv
 
-##### E3 Ebisu BSP
+#### E3 Ebisu BSP
     sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm
 
     git clone git://git.yoctoproject.org/poky
