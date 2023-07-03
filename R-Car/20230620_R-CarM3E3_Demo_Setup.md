@@ -175,7 +175,7 @@ SD2 設定
     setenv bootcmd 'ext4load mmc 2:1 0x48080000 /boot/Image;ext4load mmc 2:1 0x48000000 /boot/r8a7796-salvator-xs-2x4g_cr7_rproc_lvds.dtb;booti 0x48080000 - 0x48000000'
     saveenv
 
-#### E3 Ebisu BSP
+### E3 Ebisu BSP
     sudo apt-get install gawk wget git-core diffstat unzip texinfo gcc-multilib build-essential chrpath socat cpio python3 python3-pip python3-pexpect xz-utils debianutils iputils-ping python3-git python3-jinja2 libegl1-mesa libsdl1.2-dev pylint3 xterm
 
     git clone git://git.yoctoproject.org/poky
@@ -272,7 +272,8 @@ rootfs存放於TF插槽
     setenv bootdelay '3'
     setenv bootmode 'android'
 
-##### E3
+##### working
+```
     setenv bootcmd 'ext4load mmc 0:1 0x48080000 /boot/Image;ext4load mmc 2:1 0x48000000 /boot/r8a77990-ebisu-4d_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
 
     setenv bootcmd 'ext4load mmc 1:0 0x48080000 /boot/Image;ext4load mmc 2:1 0x48000000 /boot/r8a77990-ebisu-4d_cr7_rproc.dtb;booti 0x48080000 - 0x48000000'
@@ -308,3 +309,4 @@ rootfs存放於TF插槽
     
     
     git clone https://github.com/renesas-rcar/meta-renesas
+```
