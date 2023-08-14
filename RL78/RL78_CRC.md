@@ -2,7 +2,8 @@ RL78 CRC
 ====================
 Summary
 --------------------
-HWM 28.3  Operation of Functional Safety 
+詳細使用位於 HWM 28.3  Operation of Functional Safety   
+
 * 使用 CRC-16-CCITT 算法 (初值 `0000H`)
 * 在 on-chip debug 時，CRC 的結果會因為斷點的不同而改變。
 * 在 on-chip debug 時，CRC 的結果會和一般的程式不同，因為 Code Flash 的內容包含了 debug 的程式。
@@ -11,12 +12,68 @@ HWM 28.3  Operation of Functional Safety
 程式流程
 --------------------
 * 設定 FEA5 到 FEA0 位元 (指定程式大小，但會少 4 個位元，用來存放 CRC 數值以供比對)
-* 將 HALT 和 RET 指定搬到 RAM。
+* 將 HALT 和 RET 指令搬到 RAM。
 * 停用中斷
 * `CRC0CTL.CRC0EN = 1` 啟用 CRC high-speed operation
 * 呼叫在 RAM 的副程式 (包含 HALt 和 RET 指令)
 * `CRC0CTL.CRC0EN = 0` 停用 CRC high-speed operation
 * 由暫存器 `PGCRC` 讀出 CRC 數值
+
+範例程式
+--------------------
+用 C 語編寫 `crc_operation()` 及 `crc_operation_end()`，其 `crc_operation_end()` 是用於抓取 `crc_operation()` 束位址用的。   
+另外，編寫 copy to ram 的函式，範例如下：
+
+    #define RAM_ADDR (0xFA900)
+
+    void copy_crc_func_to_ram(void){
+        __far uint8_t *src = &crc_operation;
+        __far uint8_t *src_ed = &crc_operation_end;
+        uint8_t *tar_adr;
+    
+        int32_t cnt;
+    
+        cnt = (uint32_t)src_ed - (uint32_t)src;
+        tar_adr = (uint8_t *)RAM_ADDR;
+    
+        while(cnt-- > 0){
+            *tar_adr++ = *src++;
+        }
+    }
+
+在 CRC 於 RAM 的執行部份，宣告 function pointer，將其位址指向目標記憶體位址。
+
+    void (*crc_operation_ram)(void);
+    crc_operation_ram = RAM_ADDR;
+
+主程式的部份，依照流程來編寫。
+
+    // * 將 HALT 和 RET 指令搬到 RAM。
+    copy_crc_func_to_ram();
+
+    // 設定 FEA5 到 FEA0 位元
+    CRC0CTL_bit.no0 = 0;
+    CRC0CTL_bit.no1 = 0;
+    CRC0CTL_bit.no2 = 0;
+    CRC0CTL_bit.no3 = 0;
+    CRC0CTL_bit.no4 = 0;
+    CRC0CTL_bit.no5 = 0;
+
+    // 停用中斷
+    DI();
+
+    // 啟用 CRC high-speed operation
+    CRC0CTL_bit.no7 = 1;
+
+    // 呼叫在 RAM 的副程式 (包含 HALt 和 RET 指令)
+    crc_operation_ram();
+
+    // NOP x 10
+    NOP(); NOP(); NOP(); NOP(); NOP();
+    NOP(); NOP(); NOP(); NOP(); NOP();
+
+    // 停用 CRC high-speed operation
+    CRC0CTL_bit.no7 = 0;
 
 CS+
 --------------------
