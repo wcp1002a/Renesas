@@ -75,6 +75,18 @@ Summary
     // 停用 CRC high-speed operation
     CRC0CTL_bit.no7 = 0;
 
+其它做法
+--------------------
+可用 on-chip debug 時，來檢視 HALT 及 RET 的組合語言碼，之後直接宣告陣列存放，可以省去寫副程式及搬到 RAM 的步驟。
+
+    void (*crc_operation_ram)(void);
+    uint8_t crc_func_to_ram[] = {0x61, 0xED, 0xd7};
+
+    // Assign and execute
+    crc_operation_ram = crc_func_to_ram;
+    crc_operation_ram();
+
+
 CS+
 --------------------
 以利用 HWM 28.3.1  Flash Memory CRC Operation Function (high-speed CRC) 的計算來驗證程式碼 CRC 為例。   
