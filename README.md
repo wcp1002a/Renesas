@@ -1,3 +1,3 @@
 # Renesas
 
-Inline equation: $X8 + X2 + X1 + 1$
+CRC Polynomial: $X^8 + X^2 + X + 1$
