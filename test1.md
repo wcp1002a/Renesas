@@ -1,6 +1,12 @@
 test1
 =====
 
+```javascript=
+var s = "JavaScript syntax highlighting";
+alert(s);
+```
+
+
 ```{.javascript .numberLines .lineAnchors}
 var s = "JavaScript syntax highlighting";
 alert(s);
