@@ -1,5 +1,6 @@
 test1
 =====
+<script src="https://gist.github.com/wcp1002a/51812899cd4373bed334bd2a7544a00a.js"></script>
 
 ``` py linenums="1"
 def bubble_sort(items):
