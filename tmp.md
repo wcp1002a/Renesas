@@ -1,6 +1,6 @@
 tmp
 ===
-aa
+This is an inline equation: $E=mc^2$.
 
 ```asm
 #pragma inline_asm      asm_get_pc
@@ -104,3 +104,4 @@ pre {
   }
 })();
 </script>
+
