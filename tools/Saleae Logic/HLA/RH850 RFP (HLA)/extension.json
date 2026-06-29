@@ -1,0 +1,13 @@
+{
+  "name": "RH850 RFP (HLA)",
+  "apiVersion": "1.0.0",
+  "author": "Paul",
+  "version": "0.0.1",
+  "description": "RH850 RFP Package Decode",
+  "extensions": {
+    "RH850 RFP (HLA)": {
+      "type": "HighLevelAnalyzer",
+      "entryPoint": "HighLevelAnalyzer.Hla"
+    }
+  }
+}
