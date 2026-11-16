@@ -61,7 +61,8 @@ gen_secboot.py verify --mot secdr_rl78_sample.mot
 範例
 ```
 "C:\Program Files (x86)\Renesas Electronics\Programming Tools\Renesas Flash Programmer V3.23\rfp-cli.exe" -d RL78 -t E2 -if uart1 -vo 5.0 -a -key-password 00112233445566778899AABBCCDDEEFF -mac-password 0123456789ABCDEFFEDCBA9876543210 -file secdr_rl78_sample.mot 
-
+```
+```
 Enter ID Code (16 Bytes)? FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 ```
 ⚠️ __Note__: `rfp-cli` 路徑需依實際安裝目錄及版本自行修改。  
