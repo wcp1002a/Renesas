@@ -69,7 +69,7 @@ Enter ID Code (16 Bytes)? FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
 燒錄成功會印出 <span style="color:green">__Operation successful__</span> 字樣
 
 #### ■ 一般燒錄命令
-若要燒錄沒有 secure boot 的 mot，需要移除 key-password 及 mac-password 參數，不然會出現錯誤。
+若要燒錄沒有 secure boot 的 mot，需要移除 key-password 及 mac-password 參數，不然會出現錯誤。  
 `rfp-cli.exe -d RL78 -t E2 -if uart1 -vo 5.0 -a -file secdr_rl78_sample.mot `
 
 ----------------------------------------
