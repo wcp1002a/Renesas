@@ -10,8 +10,8 @@ Install GHS
 ----------------------------------------
 [GHS Package for Renesas CPA User](http://www.adac.co.jp/support/ind/relcpa/index.html)
 
-* ID:relcpauser
-* PW:relcpa3799
+* ID:`relcpauser`
+* PW:`relcpa3799`
 
 Enable GHS network license
 ----------------------------------------
